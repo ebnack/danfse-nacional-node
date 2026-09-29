@@ -1,0 +1,10 @@
+node_modules/
+exemplos/saida/
+*.pdf
+*.log
+.DS_Store
+Thumbs.db
+
+# Notas reais NUNCA entram no repositório — guarde-as fora daqui.
+privado/
+*.real.xml

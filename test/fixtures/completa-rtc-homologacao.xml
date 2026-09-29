@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- NOTA FICTÍCIA para testes: todos os nomes, documentos, endereços e valores são inventados. -->
+<NFSe versao="1.01" xmlns="http://www.sped.fazenda.gov.br/nfse">
+  <infNFSe Id="NFS35503082112223330001810000000000012327010000000019">
+    <xLocEmi>São Paulo</xLocEmi>
+    <xLocPrestacao>Campinas</xLocPrestacao>
+    <nNFSe>123</nNFSe>
+    <cLocIncid>3509502</cLocIncid>
+    <xLocIncid>Campinas</xLocIncid>
+    <xTribNac>Programação de computadores, inclusive de jogos eletrônicos, independentemente da arquitetura construtiva da máquina em que o programa será executado, incluindo tablets, smartphones e congêneres.</xTribNac>
+    <xNBS>Serviços de desenvolvimento de software personalizado</xNBS>
+    <verAplic>Exemplo_1.0</verAplic>
+    <ambGer>2</ambGer>
+    <tpEmis>1</tpEmis>
+    <procEmi>1</procEmi>
+    <cStat>100</cStat>
+    <dhProc>2027-01-15T10:20:30-03:00</dhProc>
+    <nDFSe>9999</nDFSe>
+    <emit>
+      <CNPJ>11222333000181</CNPJ>
+      <IM>1234567</IM>
+      <xNome>EMPRESA EXEMPLO PRESTADORA DE SERVIÇOS LTDA</xNome>
+      <enderNac>
+        <xLgr>RUA DOS EXEMPLOS</xLgr>
+        <nro>100</nro>
+        <xCpl>SALA 1</xCpl>
+        <xBairro>CENTRO</xBairro>
+        <cMun>3550308</cMun>
+        <UF>SP</UF>
+        <CEP>01001000</CEP>
+      </enderNac>
+      <fone>1133334444</fone>
+      <email>contato@exemplo.com.br</email>
+    </emit>
+    <valores>
+      <vCalcDR>100.00</vCalcDR>
+      <tpBM>2</tpBM>
+      <vCalcBM>50.00</vCalcBM>
+      <vBC>9750.00</vBC>
+      <pAliqAplic>2.00</pAliqAplic>
+      <vISSQN>195.00</vISSQN>
+      <vTotalRet>1057.50</vTotalRet>
+      <vLiq>8742.50</vLiq>
+    </valores>
+    <xOutInf>Informação de uso da administração municipal (exemplo).</xOutInf>
+    <IBSCBS>
+      <cLocalidadeIncid>3509502</cLocalidadeIncid>
+      <xLocalidadeIncid>Campinas</xLocalidadeIncid>
+      <valores>
+        <vBC>9255.00</vBC>
+        <vCalcReeRepRes>0.00</vCalcReeRepRes>
+        <uf><pIBSUF>0.10</pIBSUF><pRedAliqUF>0.00</pRedAliqUF><pAliqEfetUF>0.10</pAliqEfetUF></uf>
+        <mun><pIBSMun>0.00</pIBSMun><pRedAliqMun>0.00</pRedAliqMun><pAliqEfetMun>0.00</pAliqEfetMun></mun>
+        <fed><pCBS>0.90</pCBS><pRedAliqCBS>0.00</pRedAliqCBS><pAliqEfetCBS>0.90</pAliqEfetCBS></fed>
+      </valores>
+      <totCIBS>
+        <vTotNF>8835.05</vTotNF>
+        <gIBS>
+          <vIBSTot>9.26</vIBSTot>
+          <gIBSUFTot><vDifUF>0.00</vDifUF><vIBSUF>9.26</vIBSUF></gIBSUFTot>
+          <gIBSMunTot><vDifMun>0.00</vDifMun><vIBSMun>0.00</vIBSMun></gIBSMunTot>
+        </gIBS>
+        <gCBS><vDifCBS>0.00</vDifCBS><vCBS>83.30</vCBS></gCBS>
+      </totCIBS>
+    </IBSCBS>
+    <DPS versao="1.01">
+      <infDPS Id="DPS355030821122233300018100001000000000000123">
+        <tpAmb>2</tpAmb>
+        <dhEmi>2027-01-15T10:15:00-03:00</dhEmi>
+        <verAplic>Exemplo_1.0</verAplic>
+        <serie>1</serie>
+        <nDPS>123</nDPS>
+        <dCompet>2027-01-15</dCompet>
+        <tpEmit>1</tpEmit>
+        <cLocEmi>3550308</cLocEmi>
+        <subst>
+          <chSubstda>35503082112223330001810000000000012227010000000011</chSubstda>
+          <cMotivo>99</cMotivo>
+          <xMotivo>Correção do valor do serviço (exemplo)</xMotivo>
+        </subst>
+        <prest>
+          <CNPJ>11222333000181</CNPJ>
+          <IM>1234567</IM>
+          <fone>1133334444</fone>
+          <email>contato@exemplo.com.br</email>
+          <regTrib>
+            <opSimpNac>1</opSimpNac>
+            <regEspTrib>0</regEspTrib>
+          </regTrib>
+        </prest>
+        <toma>
+          <CPF>12345678909</CPF>
+          <xNome>FULANO DE TAL DA SILVA</xNome>
+          <end>
+            <endNac><cMun>3509502</cMun><CEP>13010000</CEP></endNac>
+            <xLgr>AVENIDA FICTÍCIA</xLgr>
+            <nro>200</nro>
+            <xBairro>JARDIM EXEMPLO</xBairro>
+          </end>
+          <fone>19988887777</fone>
+          <email>fulano@exemplo.com</email>
+        </toma>
+        <interm>
+          <CNPJ>44555666000199</CNPJ>
+          <xNome>INTERMEDIADORA EXEMPLO S.A.</xNome>
+          <end>
+            <endExt><cPais>PT</cPais><cEndPost>1000-001</cEndPost><xCidade>Lisboa</xCidade><xEstProvReg>Lisboa</xEstProvReg></endExt>
+            <xLgr>RUA DO EXEMPLO</xLgr>
+            <nro>10</nro>
+            <xBairro>BAIXA</xBairro>
+          </end>
+        </interm>
+        <serv>
+          <locPrest><cLocPrestacao>3509502</cLocPrestacao></locPrest>
+          <cServ>
+            <cTribNac>010401</cTribNac>
+            <cTribMun>001</cTribMun>
+            <xDescServ>Desenvolvimento de sistema sob encomenda — módulo de exemplo. Este texto é propositalmente longo para testar o corte com reticências quando a descrição não couber no quadro do DANFSe. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</xDescServ>
+            <cNBS>115021000</cNBS>
+          </cServ>
+          <obra><cObra>900000000001</cObra></obra>
+          <infoCompl>
+            <docRef>CONTRATO 1/2027</docRef>
+            <xPed>PED-42</xPed>
+            <gItemPed><xItemPed>1</xItemPed><xItemPed>2</xItemPed></gItemPed>
+            <xInfComp>Pagamento em 30 dias. Nota de exemplo gerada para testes.</xInfComp>
+          </infoCompl>
+        </serv>
+        <valores>
+          <vServPrest><vServ>10000.00</vServ></vServPrest>
+          <vDescCondIncond><vDescIncond>100.00</vDescIncond><vDescCond>50.00</vDescCond></vDescCondIncond>
+          <vDedRed><vDR>100.00</vDR></vDedRed>
+          <trib>
+            <tribMun>
+              <tribISSQN>1</tribISSQN>
+              <BM><nBM>35503080200001</nBM><pRedBCBM>0.50</pRedBCBM></BM>
+              <tpRetISSQN>2</tpRetISSQN>
+              <pAliq>2.00</pAliq>
+            </tribMun>
+            <tribFed>
+              <piscofins>
+                <CST>01</CST>
+                <vBCPisCofins>10000.00</vBCPisCofins>
+                <pAliqPis>0.65</pAliqPis>
+                <pAliqCofins>3.00</pAliqCofins>
+                <vPis>65.00</vPis>
+                <vCofins>300.00</vCofins>
+                <tpRetPisCofins>1</tpRetPisCofins>
+              </piscofins>
+              <vRetCP>0.00</vRetCP>
+              <vRetIRRF>150.00</vRetIRRF>
+              <vRetCSLL>100.00</vRetCSLL>
+            </tribFed>
+            <totTrib>
+              <pTotTrib><pTotTribFed>13.45</pTotTribFed><pTotTribEst>0.00</pTotTribEst><pTotTribMun>2.00</pTotTribMun></pTotTrib>
+            </totTrib>
+          </trib>
+        </valores>
+        <IBSCBS>
+          <finNFSe>0</finNFSe>
+          <indFinal>0</indFinal>
+          <cIndOp>100301</cIndOp>
+          <indDest>1</indDest>
+          <dest>
+            <CNPJ>77888999000155</CNPJ>
+            <xNome>DESTINATÁRIA EXEMPLO LTDA</xNome>
+            <end>
+              <endNac><cMun>4106902</cMun><CEP>80010000</CEP></endNac>
+              <xLgr>RUA DESTINO</xLgr>
+              <nro>S/N</nro>
+              <xBairro>CENTRO</xBairro>
+            </end>
+            <email>destino@exemplo.com</email>
+          </dest>
+          <valores>
+            <trib>
+              <gIBSCBS>
+                <CST>000</CST>
+                <cClassTrib>000001</cClassTrib>
+              </gIBSCBS>
+            </trib>
+          </valores>
+        </IBSCBS>
+      </infDPS>
+    </DPS>
+  </infNFSe>
+</NFSe>
