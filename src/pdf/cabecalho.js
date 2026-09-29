@@ -58,11 +58,11 @@ function identificacao(doc, id) {
   const { y, chaveAltura, linhaAltura } = M.IDENT;
   const L = largura(1), C = M.COLUNAS;
   const grande = { rotuloGrande: true, altura: linhaAltura };
-  campo(doc, { x: C[0], y, largura: M.IDENT.largura, rotulo: 'CHAVE DE ACESSO DA NFS-E', valor: id.chave, rotuloGrande: true, altura: chaveAltura });
+  campo(doc, { x: C[0], y, largura: M.IDENT.largura, rotulo: 'CHAVE DE ACESSO DA NFS-e', valor: id.chave, rotuloGrande: true, altura: chaveAltura });
   const linhas = [
-    [['NÚMERO DA NFS-E', id.numero], ['COMPETÊNCIA DA NFS-E', id.competencia], ['DATA E HORA DA EMISSÃO DA NFS-E', id.emissaoNfse]],
+    [['NÚMERO DA NFS-e', id.numero], ['COMPETÊNCIA DA NFS-e', id.competencia], ['DATA E HORA DA EMISSÃO DA NFS-e', id.emissaoNfse]],
     [['NÚMERO DA DPS', id.numeroDps], ['SÉRIE DA DPS', id.serieDps], ['DATA E HORA DA EMISSÃO DA DPS', id.emissaoDps]],
-    [['EMITENTE DA NFS-E', id.emitente], ['SITUAÇÃO DA NFS-E', id.situacao], ['FINALIDADE', id.finalidade]],
+    [['EMITENTE DA NFS-e', id.emitente], ['SITUAÇÃO DA NFS-e', id.situacao], ['FINALIDADE', id.finalidade]],
   ];
   linhas.forEach((cols, i) => {
     const yl = y + chaveAltura + i * linhaAltura;

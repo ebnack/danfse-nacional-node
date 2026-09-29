@@ -40,8 +40,8 @@ function lerNota(xml) {
 
 function simples(DPS) {
   return {
-    situacao: f.descricao(D.opSimpNac, DPS('prest/regTrib/opSimpNac')),
-    regimeApuracao: f.descricao(D.regApTribSN, DPS('prest/regTrib/regApTribSN')),
+    situacao: f.limitar(f.descricao(D.opSimpNac, DPS('prest/regTrib/opSimpNac')), 37),
+    regimeApuracao: f.limitar(f.descricao(D.regApTribSN, DPS('prest/regTrib/regApTribSN')), 77),
   };
 }
 

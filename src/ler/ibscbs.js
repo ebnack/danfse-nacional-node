@@ -14,16 +14,16 @@ function ibscbs(INF, DPS) {
   const pct = c => (V(c) ? f.percentual(V(c)) : null);
   return {
     presente,
-    cstClassTrib: f.juntar([G('CST'), G('cClassTrib')]),
-    indicadorIncidencia: f.juntar([DPS('IBSCBS/cIndOp'), cLoc, I('xLocalidadeIncid') || (m && m.nome), m && m.uf]),
-    // Somatório definido na NT: desconto incondicionado + reembolso/repasse + ISSQN + PIS + COFINS.
-    exclusoes: presente ? f.reais(soma(
-      DPS('valores/vDescCondIncond/vDescIncond'), V('vCalcReeRepRes'), INF('valores/vISSQN'),
+    cstClassTrib: f.compor([G('CST'), G('cClassTrib')]),
+    indicadorIncidencia: f.compor([DPS('IBSCBS/cIndOp'), cLoc, I('xLocalidadeIncid') || (m && m.nome), m && m.uf]),
+    // Somatório definido na NT: desconto incondicionado + reembolso/repasse + ISSQN + PIS + COFINS (0,00 sem nada).
+    exclusoes: f.reais(soma(
+      '0', DPS('valores/vDescCondIncond/vDescIncond'), V('vCalcReeRepRes'), INF('valores/vISSQN'),
       DPS('valores/trib/tribFed/piscofins/vPis'), DPS('valores/trib/tribFed/piscofins/vCofins'),
-    )) : f.VAZIO,
+    )),
     baseCalculo: f.reais(V('vBC')),
-    reducaoAliquotas: f.juntar([pct('uf/pRedAliqUF'), pct('mun/pRedAliqMun'), pct('fed/pRedAliqCBS')]),
-    aliquotasIBS: f.juntar([pct('uf/pIBSUF'), pct('mun/pIBSMun')]),
+    reducaoAliquotas: f.compor([pct('uf/pRedAliqUF'), pct('mun/pRedAliqMun'), pct('fed/pRedAliqCBS')]),
+    aliquotasIBS: f.compor([pct('uf/pIBSUF'), pct('mun/pIBSMun')]),
     aliqEfetivaMun: f.percentual(V('mun/pAliqEfetMun')),
     valorMun: f.reais(T('gIBS/gIBSMunTot/vIBSMun')),
     aliqEfetivaUF: f.percentual(V('uf/pAliqEfetUF')),

@@ -69,7 +69,7 @@ function federal(nota) {
 function ibscbs(nota) {
   const t = nota.ibscbs;
   return {
-    titulo: 'Tributação IBS / CBS',
+    titulo: 'Tributação IBS/CBS',
     linhas: [
       [c(1, 'CST / cClassTrib', t.cstClassTrib), c(2, 'Indicador de Operação / Código IBGE Incidência / Município Incidência / Sigla UF', t.indicadorIncidencia, 2)],
       [c(0, 'Exclusões e Reduções da Base de Cálculo', t.exclusoes), c(1, 'Base de Cálculo Após Exclusões e Reduções', t.baseCalculo),

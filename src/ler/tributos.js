@@ -14,7 +14,6 @@ function issqn(INF, DPS) {
   const trib = T('tribISSQN');
   const cLoc = INF('cLocIncid');
   const m = municipio(cLoc);
-  const pais = T('cPaisResult') || (cLoc ? 'BR' : null);
   const bruto = {
     regimeEspecial: DPS('prest/regTrib/regEspTrib'), imunidade: T('tpImunidade'),
     suspensao: T('exigSusp/tpSusp'), processo: T('exigSusp/nProcesso'),
@@ -26,7 +25,7 @@ function issqn(INF, DPS) {
     // Nota 4: sem ISSQN (grupo ausente ou "Não Incidência") → bloco resumido.
     sujeito: !!trib && trib !== '4',
     tipoTributacao: f.descricao(D.tribISSQN, trib),
-    municipioIncidencia: f.juntar([INF('xLocIncid') || (m && m.nome), m && m.uf, pais]),
+    municipioIncidencia: f.compor([INF('xLocIncid') || (m && m.nome), m && m.uf, T('cPaisResult')]),
     regimeEspecial: f.descricao(D.regEspTrib, bruto.regimeEspecial),
     imunidade: f.descricao(D.tpImunidade, bruto.imunidade),
     suspensao: f.descricao(D.tpSusp, bruto.suspensao),
@@ -40,7 +39,8 @@ function issqn(INF, DPS) {
     retencao: f.descricao(D.tpRetISSQN, T('tpRetISSQN')),
     apurado: f.reais(INF('valores/vISSQN')),
     // Nota 5: as linhas marcadas com ** somem quando TODOS os campos delas estão vazios no XML.
-    linhaRegimeVazia: ![bruto.regimeEspecial, bruto.imunidade, bruto.suspensao, bruto.processo].some(f.temValor),
+    // Regime especial "0 - Nenhum" conta como vazio (o portal nacional omite a linha).
+    linhaRegimeVazia: ![bruto.regimeEspecial === '0' ? null : bruto.regimeEspecial, bruto.imunidade, bruto.suspensao, bruto.processo].some(f.temValor),
     linhaBeneficioVazia: ![bruto.beneficio, bruto.calculoBM, bruto.deducoes, bruto.descontoIncond].some(f.temValor),
   };
 }

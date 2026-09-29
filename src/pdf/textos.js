@@ -41,7 +41,7 @@ function textoLivre(doc, texto, y, altura) {
 function servico(doc, nota, y, alturaDescricao) {
   const s = nota.servico;
   tituloBloco(doc, 'Serviço Prestado', y);
-  for (const k of [c(1, 'Código de Tributação Nacional / Municipal', s.codigoTributacao), c(2, 'Código da NBS', s.nbs), c(3, 'Local da Prestação / Sigla UF / País', s.localPrestacao)]) {
+  for (const k of [c(1, 'Código de Tributação Nacional/Municipal', s.codigoTributacao), c(2, 'Código da NBS', s.nbs), c(3, 'Local da Prestação / Sigla UF / País', s.localPrestacao)]) {
     campo(doc, { x: M.COLUNAS[k.coluna], y, largura: largura(k.span), rotulo: k.rotulo, valor: k.valor });
   }
   let yl = y + M.LINHA;
@@ -78,7 +78,7 @@ function canhoto(doc, nota, y) {
   const linhaY = y + 4;
   campo(doc, { x: M.COLUNAS[0] + 2, y: linhaY, largura: M.COLUNA, rotulo: 'DATA CIENTIFICAÇÃO:', valor: null, rotuloGrande: true });
   campo(doc, { x: M.COLUNAS[1], y: linhaY, largura: M.COLUNA, rotulo: 'IDENTIFICAÇÃO E ASSINATURA', valor: null, rotuloGrande: true });
-  campo(doc, { x: M.COLUNAS[2], y: linhaY, largura: largura(2) - 4, rotulo: 'Nº NFS-e / CHAVE NFS-e', valor: `${id.numero} / ${id.chave}`, rotuloGrande: true });
+  campo(doc, { x: M.COLUNAS[2], y: linhaY, largura: largura(2) - 4, rotulo: 'N° NFS-e / CHAVE NFS-e', valor: `${id.numero} / ${id.chave}`, rotuloGrande: true });
   for (const x of [M.COLUNAS[1], M.COLUNAS[2]]) doc.save().lineWidth(M.TRACO.bloco).moveTo(x, y + 2).lineTo(x, y + CANHOTO - 2).stroke().restore();
 }
 

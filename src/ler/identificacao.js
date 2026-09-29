@@ -22,12 +22,13 @@ function identificacao(INF, DPS) {
     numeroDps: f.ou(DPS('nDPS')),
     serieDps: f.ou(DPS('serie')),
     emissaoDps: f.dataHora(DPS('dhEmi')),
-    emitente: f.descricao(D.tpEmit, DPS('tpEmit')),
-    situacao: f.descricao(D.cStat, INF('cStat')),
-    finalidade: f.descricao(D.finNFSe, DPS('IBSCBS/finNFSe')),
-    municipioEmissor: f.juntar([INF('xLocEmi'), ufEmissor]),
-    ambienteGerador: f.descricao(D.ambGer, INF('ambGer')),
-    tipoAmbiente: f.descricao(D.tpAmb, DPS('tpAmb')),
+    emitente: f.limitar(f.descricao(D.tpEmit, DPS('tpEmit')), 37),
+    situacao: f.limitar(f.descricao(D.cStat, INF('cStat')), 37),
+    finalidade: f.limitar(f.descricao(D.finNFSe, DPS('IBSCBS/finNFSe')), 37),
+    municipioEmissor: f.juntar([INF('xLocEmi'), ufEmissor], ' - '),
+    // O portal nacional imprime o CÓDIGO (1/2), não a descrição.
+    ambienteGerador: f.ou(INF('ambGer')),
+    tipoAmbiente: f.ou(DPS('tpAmb')),
     homologacao: DPS('tpAmb') === '2',
   };
 }

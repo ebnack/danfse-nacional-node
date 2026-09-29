@@ -15,9 +15,9 @@ module.exports = {
     3: 'Optante - Microempresa ou Empresa de Pequeno Porte (ME/EPP)',
   },
   regApTribSN: {
-    1: 'Regime de apuração dos tributos federais e municipal pelo SN',
-    2: 'Regime de apuração dos tributos federais pelo SN e ISSQN por fora do SN conforme respectiva legislação municipal do tributo',
-    3: 'Regime de apuração dos tributos federais e municipal por fora do SN conforme respectivas legislações federal e municipal de cada tributo',
+    1: 'Regime de apuração dos tributos federais e municipal pelo Simples Nacional',
+    2: 'Regime de apuração dos tributos federais pelo Simples Nacional e ISSQN por fora do Simples Nacional conforme respectiva legislação municipal do tributo',
+    3: 'Regime de apuração dos tributos federais e municipal por fora do Simples Nacional conforme respectivas legislações federal e municipal de cada tributo',
   },
   regEspTrib: {
     0: 'Nenhum', 1: 'Ato Cooperado (Cooperativa)', 2: 'Estimativa', 3: 'Microempresa Municipal',

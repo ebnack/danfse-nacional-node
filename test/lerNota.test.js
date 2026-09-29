@@ -11,12 +11,15 @@ test('nota completa (RTC, homologação): identificação e pessoas', () => {
   assert.equal(n.identificacao.chave, '35503082112223330001810000000000012327010000000019');
   assert.equal(n.identificacao.chave.length, 50);
   assert.equal(n.identificacao.homologacao, true);
-  assert.equal(n.identificacao.tipoAmbiente, 'Homologação');
+  assert.equal(n.identificacao.tipoAmbiente, '2');   // o portal imprime o código
   assert.equal(n.identificacao.finalidade, 'NFS-e regular');
-  assert.equal(n.identificacao.municipioEmissor, 'São Paulo / SP');
+  assert.equal(n.identificacao.municipioEmissor, 'São Paulo - SP');
   assert.equal(n.prestador.nome, 'EMPRESA EXEMPLO PRESTADORA DE SERVIÇOS LTDA');   // veio do grupo emit
   assert.equal(n.tomador.documento, '123.456.789-09');
   assert.equal(n.tomador.municipio, 'Campinas / SP');
+  assert.equal(n.tomador.codigoCep, '35.09502 / 13.010-000');
+  assert.equal(n.servico.codigoTributacao, '01.04.01 / 001');
+  assert.equal(n.servico.localPrestacao, 'Campinas / SP / -');
   assert.equal(n.destinatario.municipio, 'Curitiba / PR');
   assert.equal(n.intermediario.codigoCep, 'PT / 1000-001');
 });
@@ -40,26 +43,35 @@ test('nota completa: informações complementares na ordem da NT, separadas por 
   assert.ok(ordem.every(i => i >= 0), texto);
   assert.deepEqual([...ordem].sort((a, b) => a - b), ordem);
   assert.match(texto, / \| /);
-  assert.equal(tributosAproximados, 'Totais Aproximados dos Tributos cfe. Lei nº 12.741/2012: Federais: 13,45% ; Estaduais: 0,00% ; Municipais: 2,00%');
+  assert.equal(tributosAproximados, 'Totais aproximados dos Tributos cfe. Lei n° 12.741/2012: Federais: 13,45%; Estaduais: 0,00%; Municipais: 2,00%;');
 });
 
-test('Simples sem tomador: blocos resumidos e % do Simples', () => {
+test('Simples sem tomador: como o DANFSe do portal (traços e R$ 0,00)', () => {
   const n = lerNota(xml('simples-sem-tomador.xml'));
   assert.equal(n.tomador, null);
   assert.equal(n.intermediario, null);
   assert.equal(n.destinatarioEhTomador, false);
   assert.equal(n.prestador.nome, 'POUSADA EXEMPLO LTDA');
-  assert.equal(n.prestador.telefone, '(48) 99999-0000');           // o do DPS prevalece sobre o do emit
+  assert.equal(n.prestador.telefone, '(54) 99999-0000');           // o do DPS prevalece sobre o do emit
   assert.equal(n.ibscbs.presente, false);
   assert.equal(n.ibscbs.totalIBS, '-');
-  assert.match(n.complementares.tributosAproximados, /Simples Nacional: 6,00%$/);
+  assert.equal(n.ibscbs.cstClassTrib, '- / -');
+  assert.equal(n.ibscbs.indicadorIncidencia, '- / - / - / -');
+  assert.equal(n.ibscbs.exclusoes, 'R$ 0,00');
+  assert.equal(n.totais.totalIbsCbs, 'R$ 0,00');
+  assert.equal(n.totais.liquidoMaisIbsCbs, 'R$ 0,00');
+  assert.equal(n.servico.codigoTributacao, '09.01.02 / -');
+  assert.equal(n.issqn.linhaRegimeVazia, true);   // regime especial 0 - Nenhum
+  assert.equal(n.prestadorSimples.regimeApuracao, 'Regime de apuração dos tributos federais e municipal pelo Simples Nacional');
+  // Só o % do Simples (pTotTribSN) não tem valor por esfera: o portal imprime traço.
+  assert.equal(n.complementares.tributosAproximados, 'Totais aproximados dos Tributos cfe. Lei n° 12.741/2012: Federais: -; Estaduais: -; Municipais: -;');
 });
 
-test('nota do sistema municipal: tributos em R$ e ambiente gerador Prefeitura', () => {
+test('nota do sistema municipal: tributos em R$ e ambiente gerador 1 (Prefeitura)', () => {
   const n = lerNota(xml('municipal-com-tomador.xml'));
-  assert.equal(n.identificacao.ambienteGerador, 'Prefeitura');
+  assert.equal(n.identificacao.ambienteGerador, '1');
   assert.equal(n.tomador.nome, 'CLIENTE EXEMPLO COMÉRCIO LTDA');
-  assert.match(n.complementares.tributosAproximados, /Federais: R\$ 67,25 ; Estaduais: R\$ 0,00 ; Municipais: R\$ 12,15$/);
+  assert.match(n.complementares.tributosAproximados, /Federais: R\$ 67,25; Estaduais: R\$ 0,00; Municipais: R\$ 12,15;$/);
   assert.match(n.complementares.texto, /^Inf\. Cont\.: Vencimento/);
 });
 

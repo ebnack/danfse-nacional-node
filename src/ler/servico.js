@@ -5,14 +5,13 @@ const { municipio } = require('../dados/municipios');
 function servico(INF, DPS) {
   const cLoc = DPS('serv/locPrest/cLocPrestacao');
   const m = municipio(cLoc);
-  const pais = DPS('serv/locPrest/cPaisPrestacao') || (cLoc ? 'BR' : null);
   return {
-    codigoTributacao: f.juntar([DPS('serv/cServ/cTribNac') && f.codTribNac(DPS('serv/cServ/cTribNac')), DPS('serv/cServ/cTribMun')]),
+    codigoTributacao: f.compor([DPS('serv/cServ/cTribNac') && f.codTribNac(DPS('serv/cServ/cTribNac')), DPS('serv/cServ/cTribMun')]),
     nbs: f.nbs(DPS('serv/cServ/cNBS')),
-    localPrestacao: f.juntar([INF('xLocPrestacao') || (m && m.nome), m && m.uf, pais]),
+    localPrestacao: f.compor([INF('xLocPrestacao') || (m && m.nome), m && m.uf, DPS('serv/locPrest/cPaisPrestacao')]),
     // SE xTribMun <> "" ENTÃO descrição municipal SENÃO nacional (NT 008, 2.4.5)
-    descricaoCodigo: f.ou(INF('xTribMun') || INF('xTribNac')),
-    descricao: f.ou(DPS('serv/cServ/xDescServ')),
+    descricaoCodigo: f.limitar(f.ou(INF('xTribMun') || INF('xTribNac')), 167),
+    descricao: f.limitar(f.ou(DPS('serv/cServ/xDescServ')), 1297),
   };
 }
 

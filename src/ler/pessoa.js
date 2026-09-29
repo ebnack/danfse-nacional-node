@@ -19,7 +19,7 @@ function local(P) {
     const m = municipio(nac('cMun'));
     return {
       municipio: f.juntar([m && m.nome, m && m.uf]),
-      codigoCep: f.juntar([nac('cMun'), nac('CEP') && f.cep(nac('CEP'))]),
+      codigoCep: f.juntar([nac('cMun') && f.ibge(nac('cMun')), nac('CEP') && f.cep(nac('CEP'))]),
     };
   }
   const ext = P.no('end/endExt');
@@ -41,9 +41,9 @@ function pessoa(P) {
     documento: documento(P),
     inscricaoMunicipal: f.ou(P('IM')),
     telefone: f.telefone(P('fone')),
-    nome: f.ou(P('xNome')),
+    nome: f.limitar(f.ou(P('xNome')), 77),
     ...local(P),
-    endereco: endereco(P),
+    endereco: f.limitar(endereco(P), 77),
     email: f.ou(P('email')),
   };
 }
@@ -61,10 +61,10 @@ function prestador(PR, EM, prestadorEmitiu) {
     documento: EM('CNPJ') ? f.cnpj(EM('CNPJ')) : f.cpf(EM('CPF')),
     inscricaoMunicipal: f.ou(EM('IM')),
     telefone: f.telefone(EM('fone')),
-    nome: f.ou(EM('xNome')),
+    nome: f.limitar(f.ou(EM('xNome')), 77),
     municipio: f.juntar([m ? m.nome : null, EM('enderNac/UF')]),
-    codigoCep: f.juntar([EM('enderNac/cMun'), EM('enderNac/CEP') && f.cep(EM('enderNac/CEP'))]),
-    endereco: f.juntar([EM('enderNac/xLgr'), EM('enderNac/nro'), EM('enderNac/xCpl'), EM('enderNac/xBairro')], ', '),
+    codigoCep: f.juntar([EM('enderNac/cMun') && f.ibge(EM('enderNac/cMun')), EM('enderNac/CEP') && f.cep(EM('enderNac/CEP'))]),
+    endereco: f.limitar(f.juntar([EM('enderNac/xLgr'), EM('enderNac/nro'), EM('enderNac/xCpl'), EM('enderNac/xBairro')], ', '), 77),
     email: f.ou(EM('email')),
   };
   const final = { ...doEmit };

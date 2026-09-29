@@ -37,7 +37,7 @@ fs.writeFileSync('nota.pdf', pdf);
 ```js
 await gerarDanfse(xml, {
   situacao: 'cancelada',   // 'normal' (padrão) | 'cancelada' | 'substituida' → marca d'água
-  canhoto: true,           // imprime o canhoto (bloco opcional da NT)
+  canhoto: false,          // padrão true: imprime o canhoto, como o portal
   logo: false,             // padrão: logomarca oficial (já incluída); caminho/Buffer troca; false = texto
   fontes: {                // TTF próprios; padrão: Helvetica (métrica equivalente à Arial)
     normal: 'arial.ttf',
@@ -75,19 +75,26 @@ npx danfse-nacional nota.xml saida.pdf --cancelada --canhoto
 npx danfse-nacional pasta-com-xmls/           # um PDF para cada XML
 ```
 
-## O que segue a NT à risca e onde houve interpretação
+## Igual ao DANFSe do portal nacional
 
-| Ponto | Como está |
+Onde a NT deixa margem de interpretação, a biblioteca segue o **DANFSe que o próprio portal nacional gera**.
+A versão 0.2.0 foi conferida contra PDFs baixados do portal: o texto sai idêntico, palavra por palavra.
+
+| Ponto | Como está (igual ao portal) |
 |---|---|
-| Campo sem informação no XML | Traço (`-`), nota 12 |
-| Texto que não cabe | Reticências (`...`), item 2.1; a linha dos tributos aproximados nunca é cortada |
-| Uma página | Descrição do serviço e informações complementares dividem a sobra da página (itens 2.2 e 2.3) |
+| Campo sem informação no XML | Traço (`-`), nota 12; campos compostos mantêm um traço por parte: `17.19.01 / -` |
+| Texto longo | Corta no limite de caracteres da NT (item 2.4.5) e acrescenta `...` |
+| Cabeçalho | `Município: São Paulo - SP`, `Ambiente Gerador: 1`, `Tipo de Ambiente: 1` (códigos) |
+| Código IBGE | `35.50308` |
+| Regime especial "0 - Nenhum" | A linha do regime especial não é impressa |
+| Nota sem IBS/CBS | Exclusões, Total do IBS/CBS e Valor líquido + IBS/CBS saem `R$ 0,00` |
+| Tributos aproximados | `Federais: R$ x; Estaduais: R$ y; Municipais: R$ z;` (só o % do Simples → traços) |
+| Canhoto | Impresso por padrão (`canhoto: false` tira) |
 | PIS/COFINS próprios | Linha impressa só para competência até 2026 (nota 6) |
-| Tributos aproximados só com `pTotTribSN` (Simples) | Impresso como "Simples Nacional: x%", porque é o dado que existe no XML |
-| Prestador sem nome ou endereço no DPS | Completado pelo grupo `emit` quando o emitente é o próprio prestador (o Emissor Nacional não repete esses dados no DPS) |
+| Prestador sem nome ou endereço no DPS | Completado pelo grupo `emit` |
 | Fontes | Helvetica no lugar de Arial / Microsoft Sans Serif (que não podem ser distribuídas); dá para trocar em `fontes` |
 
-Encontrou divergência com a NT? Abra uma issue citando o item.
+Encontrou divergência com o portal ou com a NT? Abra uma issue citando o item.
 
 ## Desenvolvimento
 

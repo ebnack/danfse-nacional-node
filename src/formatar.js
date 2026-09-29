@@ -69,6 +69,18 @@ function nbs(v) {
   return d.length === 9 ? d.replace(/^(\d)(\d{4})(\d{2})(\d{2})$/, '$1.$2.$3.$4') : ou(v);
 }
 
+/** Código IBGE '3550308' → '35.50308' (como o DANFSe do portal nacional). */
+function ibge(v) {
+  const d = digitos(v);
+  return d.length === 7 ? `${d.slice(0, 2)}.${d.slice(2)}` : ou(v);
+}
+
+/**
+ * Limite de caracteres da NT 008 (coluna "Tam. do Campo", item 2.4.5): passou, corta EXATAMENTE em `n`
+ * caracteres e acrescenta "..." — igual ao DANFSe do portal nacional. Traço e vazio passam direto.
+ */
+const limitar = (v, n) => (temValor(v) && String(v).length > n ? String(v).slice(0, n) + '...' : v);
+
 /** Descrição de um código pela tabela do leiaute; código fora da tabela sai como veio. */
 const descricao = (tabela, codigo) => (temValor(codigo) ? tabela[codigo] || String(codigo) : VAZIO);
 
@@ -78,7 +90,10 @@ function juntar(partes, sep = ' / ') {
   return cheias.length ? cheias.join(sep) : VAZIO;
 }
 
+/** Junta TODAS as partes, com traço no lugar das vazias: '17.19.01 / -' (como o portal nacional). */
+const compor = (partes, sep = ' / ') => partes.map(p => ou(p)).join(sep);
+
 module.exports = {
   VAZIO, temValor, ou, digitos, cnpj, cpf, cep, telefone, decimal, reais, percentual,
-  data, dataHora, codTribNac, nbs, descricao, juntar,
+  data, dataHora, codTribNac, nbs, ibge, descricao, juntar, compor, limitar,
 };

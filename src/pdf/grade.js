@@ -24,7 +24,7 @@ function bloco(doc, y, titulo, linhas) {
 
 /** Bloco suprimido (notas 2, 3 e 4 da NT): uma linha só, com a frase oficial. */
 function blocoResumido(doc, y, frase) {
-  escrever(doc, frase, M.X0 + PAD, y + (M.LINHA_RESUMIDA - M.FONTE.bloco) / 2, M.LARGURA - PAD * 2, { fonte: 'negrito', tamanho: M.FONTE.bloco });
+  escrever(doc, frase, M.X0 + PAD, y + (M.LINHA_RESUMIDA - M.FONTE.bloco) / 2, M.LARGURA - PAD * 2, { tamanho: M.FONTE.bloco, alinhar: 'center' });
   const fim = y + M.LINHA_RESUMIDA;
   linha(doc, fim);
   return fim;

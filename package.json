@@ -1,6 +1,6 @@
 {
   "name": "danfse-nacional",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Gera o DANFSe (PDF) da NFS-e Nacional a partir do XML, em Node.js. Sem certificado, sem rede, layout NT 008/2026. Aceita XML sem assinatura.",
   "main": "src/index.js",
   "bin": {

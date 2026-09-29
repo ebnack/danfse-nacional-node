@@ -54,7 +54,7 @@ function campo(doc, { x, y, largura, rotulo, valor, rotuloGrande = false, sombre
 /** Título do bloco na primeira coluna, sombreado, 7 pt negrito em caixa alta (NT 2.4.1). */
 function tituloBloco(doc, titulo, y, altura = M.LINHA) {
   sombra(doc, M.COLUNAS[0], y, M.COLUNA, altura);
-  escrever(doc, titulo.toUpperCase(), M.COLUNAS[0] + PAD, y + PAD, M.COLUNA - PAD * 2, { fonte: 'negrito', tamanho: M.FONTE.bloco });
+  escrever(doc, titulo.toUpperCase().replace(/NFS-E/g, 'NFS-e'), M.COLUNAS[0] + PAD, y + PAD, M.COLUNA - PAD * 2, { fonte: 'negrito', tamanho: M.FONTE.bloco });
 }
 
 /** Largura de um campo que ocupa `span` colunas. */

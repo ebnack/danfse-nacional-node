@@ -25,8 +25,9 @@ test('datas mantêm a hora local do XML (sem converter fuso)', () => {
   assert.equal(f.dataHora('2026-09-09T23:30:00Z'), '09/09/2026 23:30:00');
 });
 
-test('códigos de tributação e NBS', () => {
+test('códigos de tributação, NBS e IBGE', () => {
   assert.equal(f.codTribNac('171901'), '17.19.01');
+  assert.equal(f.ibge('3550308'), '35.50308');
   assert.equal(f.nbs('113022100'), '1.1302.21.00');
 });
 
@@ -36,4 +37,8 @@ test('descrição por tabela e junção', () => {
   assert.equal(f.descricao({ 1: 'Um' }, null), '-');
   assert.equal(f.juntar(['A', null, '', 'B']), 'A / B');
   assert.equal(f.juntar([null]), '-');
+  assert.equal(f.compor(['17.19.01', null]), '17.19.01 / -');
+  assert.equal(f.limitar('Optante - Microempresa ou Empresa de Pequeno Porte (ME/EPP)', 37), 'Optante - Microempresa ou Empresa de ...');
+  assert.equal(f.limitar('curto', 37), 'curto');
+  assert.equal(f.limitar('-', 1), '-');
 });

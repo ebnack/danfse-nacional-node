@@ -16,7 +16,7 @@ const { SITUACOES } = require('./pdf/marca');
  *        cancelada/substituída (isso é evento à parte) — informe aqui para sair a marca d'água.
  * @param {string|Buffer|false} [opcoes.logo]  Padrão: logomarca oficial da NFS-e (já incluída).
  *        Caminho/Buffer (PNG/JPG) troca a imagem; `false` escreve "NFS-e" em texto.
- * @param {boolean} [opcoes.canhoto=false] Imprime o canhoto (bloco opcional da NT).
+ * @param {boolean} [opcoes.canhoto=true]  Canhoto (bloco opcional da NT; o portal nacional sempre imprime).
  * @param {{normal?: string|Buffer, negrito?: string|Buffer}} [opcoes.fontes]  TTF próprios (padrão: Helvetica).
  * @returns {Promise<Buffer>}
  */
@@ -25,7 +25,7 @@ async function gerarDanfse(xml, opcoes = {}) {
   if (situacao !== 'normal' && !SITUACOES.includes(situacao)) {
     throw new TypeError(`situacao inválida: "${situacao}". Use normal, ${SITUACOES.join(' ou ')}.`);
   }
-  return renderizar(lerNota(xml), { ...opcoes, situacao });
+  return renderizar(lerNota(xml), { ...opcoes, situacao, canhoto: opcoes.canhoto !== false });
 }
 
 module.exports = { gerarDanfse, lerNota };
